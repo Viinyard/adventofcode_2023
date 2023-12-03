@@ -6,19 +6,18 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 public class FileReader {
     public static List<String> readFileToList(String fileName) throws IOException, URISyntaxException {
-        URL url = FileReader.class.getClassLoader().getResource(fileName);
-        assert url != null;
+        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new IOException("File not found"));
         Path filePath = Path.of(url.toURI());
 
         return Files.readAllLines(filePath);
     }
 
     public static String readFileToString(String fileName) throws IOException, URISyntaxException {
-        URL url = FileReader.class.getClassLoader().getResource(fileName);
-        assert url != null;
+        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new IOException("File not found"));
         Path filePath = Path.of(url.toURI());
 
         return Files.readString(filePath);

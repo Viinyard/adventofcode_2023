@@ -30,7 +30,11 @@ class Puzzle2 {
      * <p>Your puzzle answer was 53389.</p>
      */
     public static void main(String... args) throws IOException, URISyntaxException {
-        List<String> lines = FileReader.readFileToList("day1/input.txt");
+        System.out.println(solve("day1/input.txt"));
+    }
+
+    static int solve(String fileName) throws IOException, URISyntaxException {
+        List<String> lines = FileReader.readFileToList(fileName);
 
         Pattern positiveLookahead = Pattern.compile("(?=\\d|one|two|three|four|five|six|seven|eight|nine)");
         Pattern positiveLookbehind = Pattern.compile("(?<=\\d|one|two|three|four|five|six|seven|eight|nine)");
@@ -57,13 +61,11 @@ class Puzzle2 {
                 }
         );
 
-        int result = lines.stream().map(s -> {
+        return lines.stream().map(s -> {
             String first = getNumeralMatch.apply(s, List::getFirst);
             String last = getNumeralMatch.apply(s, List::getLast);
 
             return first + last;
         }).mapToInt(Integer::parseInt).sum();
-
-        System.out.println(result);
     }
 }

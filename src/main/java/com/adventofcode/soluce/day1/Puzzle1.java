@@ -30,17 +30,17 @@ public class Puzzle1 {
      * <p>Your puzzle answer was 54338.</p>
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<String> lines = FileReader.readFileToList("day1/input.txt");
+        System.out.println(solve("day1/input.txt"));
+    }
+
+    public static int solve(String fileName) throws IOException, URISyntaxException {
+        List<String> lines = FileReader.readFileToList(fileName);
 
         Pattern pattern = Pattern.compile("\\d");
 
-        int result = lines.stream().map(s -> pattern.matcher(s).results().collect(Collectors.toList()))
+        return lines.stream().map(s -> pattern.matcher(s).results().collect(Collectors.toList()))
                 .map(l -> l.getFirst().group() + l.getLast().group())
                 .mapToInt(Integer::parseInt)
                 .sum();
-
-        System.out.println(result);
     }
-
-
 }

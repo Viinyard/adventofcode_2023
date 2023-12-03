@@ -36,7 +36,11 @@ public class Puzzle1 {
      * <p>Determine which games would have been possible if the bag had been loaded with only 12 red cubes, 13 green cubes, and 14 blue cubes. <b>What is the sum of the IDs of those games?</b></p>
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String input = FileReader.readFileToString("day2/input.txt");
+        System.out.println(solve("day2/input.txt"));
+    }
+
+    static int solve(String fileName) throws IOException, URISyntaxException {
+        String input = FileReader.readFileToString(fileName);
 
         CharStream charStream = CharStreams.fromString(input);
 
@@ -45,16 +49,12 @@ public class Puzzle1 {
         Day2Parser parser = new Day2Parser(tokens);
         ASD.Games games = parser.games().out;
 
-        int sumValidGames = games.getGames().stream().filter(g -> g.getHides().stream().map(ASD.Hide::getCubes).flatMap(List::stream).allMatch(c ->
+        return games.getGames().stream().filter(g -> g.getHides().stream().map(ASD.Hide::getCubes).flatMap(List::stream).allMatch(c ->
                 switch (c.getColor()) {
                     case RED -> c.getValue() <= 12;
                     case GREEN -> c.getValue() <= 13;
                     case BLUE -> c.getValue() <= 14;
                 }
         )).map(ASD.Game::getValue).mapToInt(Integer::intValue).sum();
-
-        System.out.println(sumValidGames);
-
     }
-
 }

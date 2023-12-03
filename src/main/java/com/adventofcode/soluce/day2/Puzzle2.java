@@ -38,7 +38,13 @@ public class Puzzle2 {
      * <p>For each game, find the minimum set of cubes that must have been present. <b>What is the sum of the power of these sets?</b></p>
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String input = FileReader.readFileToString("day2/input.txt");
+        System.out.println(solve("day2/input.txt"));
+
+    }
+
+
+    static int solve(String fileName) throws IOException, URISyntaxException {
+        String input = FileReader.readFileToString(fileName);
 
         CharStream charStream = CharStreams.fromString(input);
 
@@ -47,8 +53,7 @@ public class Puzzle2 {
         Day2Parser parser = new Day2Parser(tokens);
         ASD.Games games = parser.games().out;
 
-
-        int sumValidGames = games.getGames().stream().map(g ->
+        return games.getGames().stream().map(g ->
                         g.getHides().stream().map(ASD.Hide::getCubes).flatMap(List::stream)
                                 .collect(Collectors.groupingBy(ASD.Cube::getColor,
                                         Collectors.mapping(ASD.Cube::getValue,
@@ -58,9 +63,6 @@ public class Puzzle2 {
                 ).map(Map::values)
                 .mapToInt(v -> v.stream().mapToInt(o -> o.orElse(0)).reduce((a, b) -> a * b).orElse(0))
                 .sum();
-
-        System.out.println(sumValidGames);
-
     }
 
 }
