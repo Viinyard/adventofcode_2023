@@ -1,6 +1,11 @@
 package com.adventofcode.soluce.day3;
 
+import com.adventofcode.day3.grammar.Day3Lexer;
+import com.adventofcode.day3.grammar.Day3Parser;
 import com.adventofcode.utils.FileReader;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -36,13 +41,21 @@ public class Puzzle1 {
     }
 
     static int solve(String fileName) throws IOException, URISyntaxException {
-        List<String> input = FileReader.readFileToList(fileName);
+        String input = FileReader.readFileToString(fileName);
 
+        CharStream charStream = CharStreams.fromString(input);
 
-        Engine engine = new Engine(input);
+        Day3Lexer lexer = new Day3Lexer(charStream);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        Day3Parser parser = new Day3Parser(tokens);
+        ASD.Engine engine = parser.engine().out;
 
-        List<Engine.Number> numbers = engine.getNumbers();
+        List<ASD.Number> numbers = engine.getParts().stream().filter(ASD.Number.class::isInstance).map(ASD.Number.class::cast).toList();
 
-        return numbers.stream().filter(Engine.Number::hasSymbol).mapToInt(Engine.Number::getValue).sum();
+        List<ASD.Symbol> symbols = engine.getParts().stream().filter(ASD.Symbol.class::isInstance).map(ASD.Symbol.class::cast).toList();
+
+        return numbers.stream().filter(n ->
+                symbols.stream().map(ASD.Symbol::getSize).anyMatch(n.getRectangle()::intersects)
+        ).map(ASD.Number::getValue).mapToInt(Integer::parseInt).sum();
     }
 }
