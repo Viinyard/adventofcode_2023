@@ -34,4 +34,30 @@ public class PuzzleTest {
             Assertions.assertThat(e).isInstanceOf(expectedException).hasMessage(errorMsg);
         }
     }
+
+    private static Stream<Arguments> puzzle2() {
+        return Stream.of(
+                Arguments.of("day4/test/line1.txt", 1, null, null),
+                Arguments.of("day4/test/line2.txt", 1, null, null),
+                Arguments.of("day4/test/line3.txt", 1, null, null),
+                Arguments.of("day4/test/line4.txt", 1, null, null),
+                Arguments.of("day4/test/line5.txt", 1, null, null),
+                Arguments.of("day4/test/line6.txt", 1, null, null),
+                Arguments.of("day4/test/test.txt", 30, null, null),
+                Arguments.of("day4/input.txt", 6420979, null, null)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void puzzle2(String fileName, int expected, Class<? extends Exception> expectedException, String errorMsg) {
+        try {
+            int result = Puzzle2.solve(fileName);
+
+            Assertions.assertThat(result).isEqualTo(expected);
+        } catch (Exception e) {
+            Assertions.assertThat(expectedException).withFailMessage(String.format("Unexpected exception has been thrown : %s", e)).isNotNull();
+            Assertions.assertThat(e).isInstanceOf(expectedException).hasMessage(errorMsg);
+        }
+    }
 }

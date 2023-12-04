@@ -9,7 +9,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Puzzle1 {
 
@@ -55,8 +56,8 @@ public class Puzzle1 {
         Day4Lexer lexer = new Day4Lexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Day4Parser parser = new Day4Parser(tokens);
-        List<ASD.Scratchcard> scratchcards = parser.scratchcards().out;
+        ASD.Scratchcard scratchcard = parser.scratchcards().out;
 
-        return scratchcards.stream().mapToInt(ASD.Scratchcard::getScore).sum();
+        return Stream.iterate(scratchcard.getFirst(), Objects::nonNull, ASD.Scratchcard::getNext).mapToInt(ASD.Scratchcard::getScore).sum();
     }
 }

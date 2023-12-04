@@ -8,20 +8,20 @@ options {
 import com.adventofcode.soluce.day4.ASD;
 }
 
-scratchcards returns [List<ASD.Scratchcard> out]
+scratchcards returns [ASD.Scratchcard out]
 	@init {
-	    List<ASD.Scratchcard> scratchcards = new ArrayList<ASD.Scratchcard>();
+	    ASD.Scratchcard scratchcard = null;
 	}
-  : (scratchcard {
-  	scratchcards.add($scratchcard.out);
+  : (scratchcard[scratchcard] {
+  	scratchcard = $scratchcard.out;
 	})+ {
-		$out = scratchcards;
+		$out = scratchcard;
 	}
 	;
 
-scratchcard returns [ASD.Scratchcard out]
+scratchcard [ASD.Scratchcard previous] returns [ASD.Scratchcard out]
 	: (CARD cardNumber=INT COLON num=numbers PIPE winNum=numbers) {
-		$out = new ASD.Scratchcard(Integer.parseInt($cardNumber.text), $num.out, $winNum.out);
+		$out = new ASD.Scratchcard(previous, Integer.parseInt($cardNumber.text), $num.out, $winNum.out);
 	}
 	;
 
