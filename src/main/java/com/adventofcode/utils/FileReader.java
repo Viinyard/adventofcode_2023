@@ -1,5 +1,6 @@
 package com.adventofcode.utils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -10,14 +11,14 @@ import java.util.Optional;
 
 public class FileReader {
     public static List<String> readFileToList(String fileName) throws IOException, URISyntaxException {
-        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new IOException("File not found"));
+        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new FileNotFoundException("File not found"));
         Path filePath = Path.of(url.toURI());
 
         return Files.readAllLines(filePath);
     }
 
     public static String readFileToString(String fileName) throws IOException, URISyntaxException {
-        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new IOException("File not found"));
+        URL url = Optional.ofNullable(FileReader.class.getClassLoader().getResource(fileName)).orElseThrow(() -> new FileNotFoundException("File not found"));
         Path filePath = Path.of(url.toURI());
 
         return Files.readString(filePath);
