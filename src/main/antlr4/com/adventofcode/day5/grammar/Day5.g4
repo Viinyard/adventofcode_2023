@@ -8,16 +8,25 @@ options {
 	import com.adventofcode.soluce.day5.ASD;
 }
 
-almanach returns [ASD.Almanach out]
+almanach1 returns [ASD.Almanach out]
 	@init {
 		ASD.Almanach asd = new ASD.Almanach();
 	}
-	: almanachMapping[asd]* {
+	: almanachMapping1[asd]* {
 		$out = asd;
 	}
 	;
 
-almanachMapping [ASD.Almanach in]
+almanach2 returns [ASD.Almanach out]
+	@init {
+		ASD.Almanach asd = new ASD.Almanach();
+	}
+	: almanachMapping2[asd]* {
+		$out = asd;
+	}
+	;
+
+almanachMapping1 [ASD.Almanach in]
 	: seeds[in]
 	| seedToSoil[in]
 	| soilToFertilizer[in]
@@ -27,6 +36,23 @@ almanachMapping [ASD.Almanach in]
 	| temperatureToHumidity[in]
 	| humidityToLocation[in]
   ;
+
+almanachMapping2 [ASD.Almanach in]
+	: seedsRange[in]
+	| seedToSoil[in]
+	| soilToFertilizer[in]
+	| fertilizerToWater[in]
+	| waterToLight[in]
+	| lightToTemperature[in]
+	| temperatureToHumidity[in]
+	| humidityToLocation[in]
+  ;
+
+seedsRange [ASD.Almanach in]
+	: SEEDS rangeList {
+		in.setSeedRanges($rangeList.out);
+	}
+	;
 
 seeds [ASD.Almanach in]
 	@init {
@@ -93,9 +119,26 @@ mappingList returns [List<ASD.Mapping> out]
 	}
 	;
 
+rangeList returns [List<ASD.Range> out]
+	@init {
+		List<ASD.Range> ranges = new ArrayList<>();
+	}
+	: (range {
+		ranges.add($range.out);
+	})* {
+		$out = ranges;
+	}
+	;
+
+range returns [ASD.Range out]
+	: begin=INT length=INT {
+		$out = new ASD.Range(Long.parseLong($begin.text), Long.parseLong($length.text));
+	}
+	;
+
 map returns [ASD.Mapping out]
-  : dest=INT source=INT range=INT {
-		$out = new ASD.Mapping(Long.parseLong($dest.text), Long.parseLong($source.text), Long.parseLong($range.text));
+  : dest=INT source=INT length=INT {
+		$out = new ASD.Mapping(Long.parseLong($dest.text), Long.parseLong($source.text), Long.parseLong($length.text));
 	}
   ;
 

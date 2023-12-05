@@ -11,6 +11,7 @@ public class ASD {
     @Data
     public static class Almanach {
         private List<Long> seeds;
+        private List<Range> seedRanges;
         private List<Mapping> seedToSoil;
         private final UnaryOperator<Long> seedToSoilFunction = seed -> mapping(seed, seedToSoil);
         private List<Mapping> soilToFertilizer;
@@ -52,6 +53,19 @@ public class ASD {
         public boolean contains(long value) {
             return value >= source && value < source + range;
         }
+    }
+
+    @Data
+    public static class Range {
+        private long start;
+        private long length;
+
+        public Range(long start, long length) {
+            this.start = start;
+            this.length = length;
+        }
+
+
     }
 
 

@@ -112,7 +112,7 @@ public class Puzzle1 {
         Day5Lexer lexer = new Day5Lexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Day5Parser parser = new Day5Parser(tokens);
-        ASD.Almanach almanach = parser.almanach().out;
+        ASD.Almanach almanach = parser.almanach2().out;
 
         return almanach.getSeeds().stream().map(almanach.getSeedToLocationFunction()).min(Long::compareTo).orElseThrow(() -> new IllegalStateException("No seed found"));
     }
