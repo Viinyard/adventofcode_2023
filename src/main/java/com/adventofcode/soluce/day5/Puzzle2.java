@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Puzzle2 {
@@ -39,6 +40,6 @@ public class Puzzle2 {
         Day5Parser parser = new Day5Parser(tokens);
         ASD.Almanach almanach = parser.almanach2().out;
 
-        return almanach.getSeedRanges().stream().flatMap(range -> Stream.iterate(range.getStart(), i -> i + 1).limit(range.getLength())).parallel().map(almanach.getSeedToLocationFunction()).min(Long::compareTo).orElseThrow(() -> new IllegalStateException("No seed found"));
+        return Stream.of(almanach.getSeedRanges()).map(almanach.getSeedToLocationFunction()).flatMap(List::stream).mapToLong(ASD.Range::getStart).min().orElseThrow(() -> new IllegalStateException("No seed found"));
     }
 }

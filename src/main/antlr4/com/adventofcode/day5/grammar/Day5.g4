@@ -55,13 +55,8 @@ seedsRange [ASD.Almanach in]
 	;
 
 seeds [ASD.Almanach in]
-	@init {
-		List<Long> s = new ArrayList<>();
-	}
-	: SEEDS (seed=INT {
-		s.add(Long.parseLong($seed.text));
-	})* {
-		in.setSeeds(s);
+	: SEEDS seedList {
+		in.setSeedRanges($seedList.out);
 	}
 	;
 
@@ -119,6 +114,17 @@ mappingList returns [List<ASD.Mapping> out]
 	}
 	;
 
+seedList returns [List<ASD.Range> out]
+	@init {
+		List<ASD.Range> ranges = new ArrayList<>();
+	}
+	: (seed=INT {
+		ranges.add(new ASD.Range(Long.parseLong($seed.text), Long.parseLong($seed.text) + 1));
+	})* {
+		$out = ranges;
+	}
+	;
+
 rangeList returns [List<ASD.Range> out]
 	@init {
 		List<ASD.Range> ranges = new ArrayList<>();
@@ -132,7 +138,7 @@ rangeList returns [List<ASD.Range> out]
 
 range returns [ASD.Range out]
 	: begin=INT length=INT {
-		$out = new ASD.Range(Long.parseLong($begin.text), Long.parseLong($length.text));
+		$out = new ASD.Range(Long.parseLong($begin.text), Long.parseLong($begin.text) + Long.parseLong($length.text));
 	}
 	;
 

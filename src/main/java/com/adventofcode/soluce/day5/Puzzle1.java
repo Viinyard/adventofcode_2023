@@ -9,6 +9,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Puzzle1 {
 
@@ -112,8 +114,8 @@ public class Puzzle1 {
         Day5Lexer lexer = new Day5Lexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Day5Parser parser = new Day5Parser(tokens);
-        ASD.Almanach almanach = parser.almanach2().out;
+        ASD.Almanach almanach = parser.almanach1().out;
 
-        return almanach.getSeeds().stream().map(almanach.getSeedToLocationFunction()).min(Long::compareTo).orElseThrow(() -> new IllegalStateException("No seed found"));
+        return Stream.of(almanach.getSeedRanges()).map(almanach.getSeedToLocationFunction()).flatMap(List::stream).mapToLong(ASD.Range::getStart).min().orElseThrow(() -> new IllegalStateException("No seed found"));
     }
 }

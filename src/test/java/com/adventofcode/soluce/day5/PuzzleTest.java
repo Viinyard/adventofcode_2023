@@ -31,7 +31,8 @@ public class PuzzleTest {
 
     private static Stream<Arguments> puzzle2() {
         return Stream.of(
-                Arguments.of("day5/test/test.txt", 46, null, null)
+                Arguments.of("day5/test/test.txt", 46, null, null),
+                Arguments.of("day5/input.txt", 20191102, null, null)
         );
     }
 
