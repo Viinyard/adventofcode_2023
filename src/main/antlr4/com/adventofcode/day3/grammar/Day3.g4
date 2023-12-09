@@ -42,17 +42,16 @@ GEAR
 
 INT
    // integer part forbis leading 0s (e.g. `01`)
-   : '0' | [1-9][0-9]*
+   : ZERO | [1-9][0-9]*
    ;
+
+fragment ZERO : '0';
+
 
 SYMBOL
   : .
   ;
 
-
-
-
-
 WS
-   : [ \t\n\r] + -> skip
+   : [ \t\n\r]+ -> skip
    ;
