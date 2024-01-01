@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<environment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="environment.xsd">
+    <properties>
+        <property key="SRC">Solutions/src/main/java</property>
+        <property key="ANTLR_SRC">Solutions/src/main/antlr4</property>
+        <property key="RES">Solutions/src/main/resources</property>
+        <property key="TEST_SRC">Solutions/src/test/java</property>
+        <property key="TEST_RES">Solutions/src/test/resources</property>
+        <property key="PACKAGE">pro/vinyard/adventofcode</property>
+    </properties>
+</environment>
