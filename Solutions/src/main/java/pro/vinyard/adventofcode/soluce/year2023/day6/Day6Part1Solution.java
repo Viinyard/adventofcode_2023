@@ -3,8 +3,8 @@ package pro.vinyard.adventofcode.soluce.year2023.day6;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import pro.vinyard.adventofcode.core.Solution;
-import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
+import pro.vinyard.adventofcode.api.Solution;
+import pro.vinyard.adventofcode.api.annotation.AdventOfCodeSolution;
 
 
 @AdventOfCodeSolution(year = 2023, day = 6, part = 1, description = "Wait For It", link = "https://adventofcode.com/2023/day/6", tags = "unsolved")

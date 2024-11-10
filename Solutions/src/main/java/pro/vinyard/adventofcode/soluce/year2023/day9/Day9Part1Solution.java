@@ -3,8 +3,8 @@ package pro.vinyard.adventofcode.soluce.year2023.day9;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import pro.vinyard.adventofcode.core.Solution;
-import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
+import pro.vinyard.adventofcode.api.Solution;
+import pro.vinyard.adventofcode.api.annotation.AdventOfCodeSolution;
 
 
 @AdventOfCodeSolution(year = 2023, day = 9, part = 1, description = "Mirage Maintenance", link = "https://adventofcode.com/2023/day/9", tags = "unsolved")

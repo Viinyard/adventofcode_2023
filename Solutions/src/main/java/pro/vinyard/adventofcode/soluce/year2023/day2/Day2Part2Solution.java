@@ -3,8 +3,8 @@ package pro.vinyard.adventofcode.soluce.year2023.day2;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
-import pro.vinyard.adventofcode.core.Solution;
-import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
+import pro.vinyard.adventofcode.api.Solution;
+import pro.vinyard.adventofcode.api.annotation.AdventOfCodeSolution;
 
 import java.util.List;
 import java.util.Map;

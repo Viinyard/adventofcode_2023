@@ -1,6 +1,6 @@
 package pro.vinyard.adventofcode.plugins.core;
 
-import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
+import pro.vinyard.adventofcode.plugins.core.annotation.AdventOfCodeSolution;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -49,7 +49,8 @@ public class SolutionFilter {
         PART,
         TAGS,
         DESCRIPTION,
-        LINK;
+        LINK,
+        CLASSLOADER;
 
         public static SolverArgumentType from(String value) {
             return SolverArgumentType.valueOf(value.toUpperCase());

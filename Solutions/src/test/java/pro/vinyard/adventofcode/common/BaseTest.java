@@ -5,7 +5,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import pro.vinyard.adventofcode.core.Solution;
+import pro.vinyard.adventofcode.api.Solution;
 import pro.vinyard.adventofcode.utils.FileReader;
 
 import java.util.stream.Stream;

@@ -22,6 +22,11 @@ public class AoCVelocityBlueprintSolutionExtension implements VelocityBlueprintE
 
     private SolutionFilter args = new SolutionFilter();
 
+    public void classLoader(String path) {
+        logger.debug("classLoader: {}", path);
+        args.add(SolutionFilter.SolverArgumentType.CLASSLOADER, path);
+    }
+
     @Override
     public void init(VelocityContext context) {
         args = new SolutionFilter();

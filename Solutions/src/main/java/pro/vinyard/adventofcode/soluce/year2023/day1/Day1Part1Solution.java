@@ -1,7 +1,8 @@
 package pro.vinyard.adventofcode.soluce.year2023.day1;
 
-import pro.vinyard.adventofcode.core.Solution;
-import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
+
+import pro.vinyard.adventofcode.api.Solution;
+import pro.vinyard.adventofcode.api.annotation.AdventOfCodeSolution;
 
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;

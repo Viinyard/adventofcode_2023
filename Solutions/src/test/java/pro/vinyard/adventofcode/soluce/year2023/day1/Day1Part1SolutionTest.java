@@ -1,8 +1,8 @@
 package pro.vinyard.adventofcode.soluce.year2023.day1;
 
 import org.junit.jupiter.params.provider.Arguments;
+import pro.vinyard.adventofcode.api.Solution;
 import pro.vinyard.adventofcode.common.BaseTest;
-import pro.vinyard.adventofcode.core.Solution;
 
 import java.util.stream.Stream;
 

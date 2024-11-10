@@ -1,9 +1,16 @@
 package pro.vinyard.adventofcode.plugins.core;
 
 import org.reflections.Reflections;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 import pro.vinyard.adventofcode.core.Solution;
 import pro.vinyard.adventofcode.core.annotation.AdventOfCodeSolution;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +20,16 @@ import java.util.stream.Collectors;
 public class SolutionRetriever {
 
     public static List<Solution<?>> retrieve(SolutionFilter args) {
-        Set<Class<?>> solutionClazz = new Reflections("pro.vinyard.adventofcode.soluce").getTypesAnnotatedWith(AdventOfCodeSolution.class);
+        URL[] urls = args.get(SolutionFilter.SolverArgumentType.CLASSLOADER).orElseGet(Collections::emptyList).stream().map(File::new).map(File::toURI).map(uri -> {
+            try {
+                return uri.toURL();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }).toArray(URL[]::new);
+
+
+        Set<Class<?>> solutionClazz = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forClassLoader(new URLClassLoader(urls)))).getTypesAnnotatedWith(AdventOfCodeSolution.class);
 
         Predicate<Class<?>> annotationFilter = clazz -> clazz.isAnnotationPresent(AdventOfCodeSolution.class);
         Predicate<Class<?>> typeFilter = Solution.class::isAssignableFrom;
