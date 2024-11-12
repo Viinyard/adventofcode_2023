@@ -1,0 +1,51 @@
+name: Run Blueprinter Solution Generator
+
+on:
+  schedule:
+    - cron: "30 6 1-25 12 *"
+
+jobs:
+  run-blueprinter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Get current date
+        id: date
+        run: |
+          echo "YEAR=$(date +'%Y')" >> $GITHUB_ENV
+          echo "DAY=$(date +'%d')" >> $GITHUB_ENV
+
+      - name: Create and switch to new branch
+        run: |
+          git checkout -b generated-solution-${{ env.YEAR }}-${{ env.DAY }}
+
+      - name: Run Maven command
+        run: mvn -pl blueprinter-runner/blueprinter-solution-gen spring-boot:run -D"spring-boot.run.arguments=--YEAR=${{ env.YEAR }} --DAY=${{ env.DAY }}"
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Generated solution for ${{ env.YEAR }}-${{ env.DAY }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
+          branch: "solution-${{ env.YEAR }}-${{ env.DAY }}"
+          title: "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
+          body: "This pull request contains the generated solution for ${{ env.YEAR }}-${{ env.DAY }}."
+          labels: "generated"

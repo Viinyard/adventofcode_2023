@@ -1,4 +1,0 @@
-#set($index = $math.sub($PART, 1))
-#set ($url = $INPUT_LINK)
-#set ($input = $aoc.getInput($url, $SESSION_ID))
-$input
