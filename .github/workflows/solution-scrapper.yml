@@ -23,7 +23,7 @@ jobs:
           echo "DAY=12" >> $GITHUB_ENV
           echo "AOC_SESSION_ID=${{ secrets.AOC_SESSION_ID }}" >> $GITHUB_ENV
 
-      - uses: s4u/maven-settings-action@v2.3.0
+      - uses: s4u/maven-settings-action@v3.1.0
         with:
           servers: |
             [{
@@ -50,4 +50,5 @@ jobs:
           branch: "solution-${{ env.YEAR }}-${{ env.DAY }}"
           title: "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
           body: "This pull request contains the generated solution for ${{ env.YEAR }}-${{ env.DAY }}."
+          draft: true
           labels: "generated"
