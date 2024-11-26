@@ -26,8 +26,14 @@ jobs:
         run: |
           git checkout -b generated-solution-${{ env.YEAR }}-${{ env.DAY }}
 
-      - name: Build project
-        run: mvn clean install
+      - uses: s4u/maven-settings-action@v2.3.0
+        with:
+          servers: |
+            [{
+                "id": "github",
+                "username": "${{ secrets.USER_PACKAGE_READ }}",
+                "password": "${{ secrets.TOKEN_PACKAGE_READ }}"
+            }]
 
       - name: Run Maven command
         run: mvn -pl blueprinter-runner/blueprinter-solution-gen spring-boot:run -D"spring-boot.run.arguments=--YEAR=${{ env.YEAR }} --DAY=${{ env.DAY }}"
