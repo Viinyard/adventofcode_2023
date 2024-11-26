@@ -22,10 +22,6 @@ jobs:
           echo "YEAR=$(date +'%Y')" >> $GITHUB_ENV
           echo "DAY=$(date +'%d')" >> $GITHUB_ENV
 
-      - name: Create and switch to new branch
-        run: |
-          git checkout -b generated-solution-${{ env.YEAR }}-${{ env.DAY }}
-
       - uses: s4u/maven-settings-action@v2.3.0
         with:
           servers: |
@@ -38,19 +34,10 @@ jobs:
       - name: Run Maven command
         run: mvn -pl blueprinter-runner/blueprinter-solution-gen spring-boot:run -D"spring-boot.run.arguments=--YEAR=${{ env.YEAR }} --DAY=${{ env.DAY }}"
 
-      - name: Configure git
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Generated solution for ${{ env.YEAR }}-${{ env.DAY }}"
-
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
+
           commit-message: "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
           branch: "solution-${{ env.YEAR }}-${{ env.DAY }}"
           title: "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
