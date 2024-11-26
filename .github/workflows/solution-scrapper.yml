@@ -1,5 +1,7 @@
 name: Run Blueprinter Solution Generator
 
+on: workflow_dispatch
+
 on:
   schedule:
     - cron: "30 6 1-25 12 *"
