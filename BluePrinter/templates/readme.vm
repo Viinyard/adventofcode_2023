@@ -1,7 +1,7 @@
 # Advent of Code Solutions
 Solutions to the [Advent of Code](https://adventofcode.com/) problem sets.
 
-$aocSolutions.classLoader("C:\Users\conta\IdeaProjects\adventofcode\Solutions\target\solutions-2023.1-SNAPSHOT.jar")
+$aocSolutions.classLoader(${path})
 
 ## Results
 #set($solutions = $aocSolutions.getSolutions())

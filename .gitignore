@@ -39,3 +39,6 @@ build/
 
 ### BluePrinter ###
 BluePrinter/plugins/*.jar
+
+### BluePrinter ###
+BluePrinter/plugins/*.jar
