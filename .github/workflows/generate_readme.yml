@@ -1,7 +1,7 @@
-name: Generate antlr4 based Solution of the Day
+name: Generate readme
 
 on:
-  push
+  workflow_dispatch
 
 jobs:
   run-blueprinter:
