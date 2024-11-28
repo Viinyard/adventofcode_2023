@@ -1,4 +1,4 @@
-name: Run Blueprinter Solution Generator
+name: Generate Next antlr4 based Solution
 
 on: workflow_dispatch
 
