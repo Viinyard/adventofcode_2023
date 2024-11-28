@@ -42,4 +42,7 @@ jobs:
           mvn -pl blueprinter-runner spring-boot:run -D"spring-boot.run.arguments=readme --path=../solutions/target/solutions.jar"
           git add -A
           git commit -am "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
-          git push
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.PAT }}
