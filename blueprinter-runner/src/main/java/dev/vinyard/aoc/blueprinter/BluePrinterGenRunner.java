@@ -30,7 +30,7 @@ public class BluePrinterGenRunner {
 
             promptRepository.findAll().forEach(prompt -> log.info("Prompt: {}", prompt));
 
-            generationManager.generate("readme");
+            generationManager.generate(args.getNonOptionArgs().getFirst());
 
             promptRepository.deleteAll();
         };

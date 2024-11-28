@@ -10,16 +10,10 @@
     <groupId>dev.vinyard.aoc.blueprinter</groupId>
     <artifactId>blueprinter-runner</artifactId>
     <name>blueprinter-runner</name>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>blueprinter-readme-gen</module>
-        <module>blueprinter-solution-gen</module>
-    </modules>
 
     <properties>
         <!--suppress UnresolvedMavenProperty -->
-        <home.dir>${project.parent.parent.basedir}</home.dir>
+        <home.dir>${project.parent.basedir}</home.dir>
     </properties>
 
     <dependencyManagement>
@@ -44,6 +38,14 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
 
         <resources>
             <resource>
