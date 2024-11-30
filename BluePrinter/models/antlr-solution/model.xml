@@ -50,7 +50,7 @@
             <value key="Integer">Integer</value>
             <value key="Double">Double</value>
             <value key="Float">Float</value>
-            <value key="Object" selected="true">Object</value>
+            <value key="Object">Object</value>
         </monoSelect>
         <stringInput value="LINK" order="5">
             <defaultValue>https://adventofcode.com/${YEAR}/day/${DAY}</defaultValue>

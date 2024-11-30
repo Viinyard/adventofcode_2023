@@ -41,7 +41,7 @@
             <defaultValue>Solutions\target\solutions.jar</defaultValue>
         </stringInput>
         <setupInput value="LAST_SOLUTION" order="2">
-            <setup>$aocSolutions.classLoader("Solutions\target\solutions.jar")</setup>
+            <setup>$aocSolutions.classLoader(${path})</setup>
         </setupInput>
         <stringInput value="YEAR" order="3">
             <defaultValue>$aocSolutions.getNextSolution().year()</defaultValue>

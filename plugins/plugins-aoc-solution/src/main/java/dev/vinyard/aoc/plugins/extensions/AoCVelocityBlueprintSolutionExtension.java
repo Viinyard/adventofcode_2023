@@ -24,10 +24,9 @@ public class AoCVelocityBlueprintSolutionExtension implements BluePrinterExtensi
 
     private SolutionFilter args = new SolutionFilter();
 
-    public AoCVelocityBlueprintSolutionExtension classLoader(String path) {
+    public void classLoader(String path) {
         log.info("classLoader: {}", path);
         args.add(SolutionFilter.SolverArgumentType.CLASSLOADER, path);
-        return this;
     }
 
     @Override
@@ -37,40 +36,34 @@ public class AoCVelocityBlueprintSolutionExtension implements BluePrinterExtensi
         context.put("aocSolutions", this);
     }
 
-    public AoCVelocityBlueprintSolutionExtension year(String year) {
+    public void year(String year) {
         log.info("year: {}", year);
         args.add(SolutionFilter.SolverArgumentType.YEAR, year);
-        return this;
     }
 
-    public AoCVelocityBlueprintSolutionExtension day(String day) {
+    public void day(String day) {
         log.info("day: {}", day);
         args.add(SolutionFilter.SolverArgumentType.DAY, day);
-        return this;
     }
 
-    public AoCVelocityBlueprintSolutionExtension part(String part) {
+    public void part(String part) {
         log.info("part: {}", part);
         args.add(SolutionFilter.SolverArgumentType.PART, part);
-        return this;
     }
 
-    public AoCVelocityBlueprintSolutionExtension tags(String tags) {
+    public void tags(String tags) {
         log.info("tags: {}", tags);
         args.add(SolutionFilter.SolverArgumentType.TAGS, tags);
-        return this;
     }
 
-    public AoCVelocityBlueprintSolutionExtension description(String description) {
+    public void description(String description) {
         log.info("description: {}", description);
         args.add(SolutionFilter.SolverArgumentType.DESCRIPTION, description);
-        return this;
     }
 
-    public AoCVelocityBlueprintSolutionExtension link(String link) {
+    public void link(String link) {
         log.info("link: {}", link);
         args.add(SolutionFilter.SolverArgumentType.LINK, link);
-        return this;
     }
 
     public String nanoToSeconds(long nano) {
