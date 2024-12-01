@@ -19,8 +19,6 @@ jobs:
       - name: Setup environment variables
         id: date
         run: |
-          echo "YEAR=$(date +'%Y')" >> $GITHUB_ENV
-          echo "DAY=$(date +'%d')" >> $GITHUB_ENV
           echo "AOC_SESSION_ID=${{ secrets.AOC_SESSION_ID }}" >> $GITHUB_ENV
 
       - uses: s4u/maven-settings-action@v3.1.0
@@ -38,7 +36,7 @@ jobs:
           git config user.name 'Viinyard'
           git config user.email 'viinyard@users.noreply.github.com'
           mvn clean package -DskipTests
-          mvn -pl blueprinter-runner spring-boot:run -D"spring-boot.run.arguments=antlr-solution --YEAR=${{ env.YEAR }} --DAY=${{ env.DAY }} --RESPONSE_TYPE=Long"
+          mvn -pl blueprinter-runner spring-boot:run -D"spring-boot.run.arguments=antlr-solution --RESPONSE_TYPE=Long"
           git add -A
           git commit -am "Solution for ${{ env.YEAR }}-${{ env.DAY }}"
 
