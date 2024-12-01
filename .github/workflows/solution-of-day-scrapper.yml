@@ -19,6 +19,8 @@ jobs:
       - name: Setup environment variables
         id: date
         run: |
+          echo "YEAR=$(date +'%Y')" >> $GITHUB_ENV
+          echo "DAY=$(date +'%d')" >> $GITHUB_ENV
           echo "AOC_SESSION_ID=${{ secrets.AOC_SESSION_ID }}" >> $GITHUB_ENV
 
       - uses: s4u/maven-settings-action@v3.1.0
